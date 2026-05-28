@@ -1,0 +1,13 @@
+# R
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# macOS / editors
+.DS_Store
+.vscode/
+.idea/
+
+# generated outputs (keep the folder via .gitkeep, but track the headline figure)
+outputs/example_run_output.txt
