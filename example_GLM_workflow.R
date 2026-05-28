@@ -30,29 +30,27 @@ sights <- read.csv("data/sightings.csv", stringsAsFactors = FALSE)
 lookup <- read.csv("data/species_lookup.csv", stringsAsFactors = FALSE)
 
 # Inspect data
-cat("\n--- raw data ---\n")
-cat("effort rows  :", nrow(effort),  "\n")
-cat("sighting rows:", nrow(sights),  "\n")
-str(effort)
+nrow(effort)
+nrow(sights)
+table(species)
+
 
 # 3. Clean the effort table ---------------------------------------------------
-
 # DROP FAILED DEPLOYMENTS.
 # A failed deployment (no usable video) is MISSING DATA, not a zero. If you
 # treat it as MaxN = 0 you are treating the species as absent when actually
 # the camera never recorded. Identify failures from the
 # notes column.
-print(table(effort$notes[effort$notes != ""]))
-#Identify these and remove
+table(effort$notes[effort$notes != ""])
+table
 
-# 3b. Make factors from characters
+# 3b. Make factors from characters, necessary to add as predictors
 effort_ok$reef_zone <- factor(effort_ok$reef_zone,
                               levels = c("Forereef","Channel","Lagoon","Backreef"))
 effort_ok$season    <- factor(effort_ok$season, levels = c("Dry","Wet"))
 
 
 # 4. Compute MaxN per deployment of species of interest -------------------------------
-#
 # MaxN = maximum count of a species seen across a single deployment 
 # Compute it by:
 #   (i)  filter sightings to the species of interest,
